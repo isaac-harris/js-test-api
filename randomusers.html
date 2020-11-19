@@ -1,0 +1,20 @@
+<html>
+  <p id="weather">undefined</p>
+</html>
+
+<script>
+
+const ul = document.getElementById("weather");
+const url = "http://api.openweathermap.org/data/2.5/weather?lat=52.373138&lon=-1.551800&appid=7edd3815d4262f09773bd7e52ac2512c";
+fetch(url)
+.then((resp) => resp.json())
+.then(function(data) {
+  //let a_bus = data.results[0].name.first + " " + data.results[0].name.last;
+  let weather = data.coord.lat + ", " + data.coord.lon + " --- " + data.weather[0].main + " - " + data.weather[0].description;
+  ul.innerHTML = weather;
+  })
+.catch(function(error) {
+  console.log(error);
+});
+
+</script>
