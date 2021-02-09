@@ -1,0 +1,24 @@
+<html>
+  <p id="weather" style="font-size:24px">looking up..</p>
+</html>
+
+<script>
+var x = setInterval(function() {
+
+const ul = document.getElementById("weather");
+const url = "http://api.openweathermap.org/data/2.5/weather?lat=52.373138&lon=-1.551800&appid=7edd3815d4262f09773bd7e52ac2512c";
+fetch(url)
+.then((resp) => resp.json())
+.then(function(data) {
+  //let a_bus = data.results[0].name.first + " " + data.results[0].name.last;
+  let weather = data.coord.lat + ", " + data.coord.lon + "<br>" + data.weather[0].main + " - " + data.weather[0].description +
+  "<br>Temperature: " + Math.round(data.main.temp - 273.15) + "°C" +
+  "<br>Humidity: " + data.main.humidity + "%";
+  ul.innerHTML = weather;
+  })
+.catch(function(error) {
+  console.log(error);
+});
+
+}, 30000);
+</script>
